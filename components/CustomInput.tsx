@@ -7,7 +7,7 @@ interface Props {
   placeHolder?: string
 }
 
-export default function CustomInput({ value, onChangeText, placeHolder }: Props) {
+export default function CustomInput({ onBlur, onFocus, value, onChangeText, placeHolder }: Props) {
   const styles = StyleSheet.create({
     input: {
       width: '100%',
@@ -25,5 +25,8 @@ export default function CustomInput({ value, onChangeText, placeHolder }: Props)
   value={value}
   onChangeText={onChangeText}
   style={styles.input} 
-  placeholder={placeHolder} />
+  placeholder={placeHolder}
+  onFocus={onFocus}
+  onBlur={onBlur}
+  />
 }
