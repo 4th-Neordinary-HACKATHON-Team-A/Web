@@ -7,9 +7,6 @@ import MemoryCard from "../../components/MemoryCard";
 const Home = () => {
   return (
     <SafeAreaView style={commonStyles.container}>
-      <View>
-        <MemoryCard />
-      </View>
     </SafeAreaView>
   )
 }
