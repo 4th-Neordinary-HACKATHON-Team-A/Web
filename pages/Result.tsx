@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { TouchableOpacity, Text, StyleSheet, View, ImageBackground, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {commonStyles} from '../styles/common'
 import {PurpleFullButton} from '../components/Button'
+import COLORS from '../styles/colors'
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 const Result = ({navigation}) => {
+  const toastRef = useRef<Toast>(null);
   return (
-    <SafeAreaView style={commonStyles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <Text style={{...commonStyles.title, paddingTop: 24}}>당신의 어렴풋한 추억이 생생해졌나요?</Text>
         <Text style={styles.title}>⦁ 추억 내용</Text>
@@ -18,25 +21,36 @@ const Result = ({navigation}) => {
         </Text>
         <Text style={styles.title}>⦁ 추억 이미지</Text>
         <ImageBackground
-          source={require('../assets/image-temp.jpg')}
+          source={require('../assets/img/result.png')}
           resizeMode='cover'
           style={styles.image}
         ></ImageBackground>
-        <PurpleFullButton text='그림 업로드 하기' onClick={()=>{navigation.navigate('Upload')}}/>
+        <PurpleFullButton width={310} height={56} text='그림 업로드 하기' onClick={()=>{navigation.navigate('Upload')}}/>
         <View style={styles.buttonBox}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.textStyle}>다시 작성하기</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => {
+            if (toastRef.current) {
+              toastRef.current.show('그림이 저장되었습니다.', 2000);
+            }
+          }}>
             <Text style={styles.textStyle}>그림 저장하기</Text>
           </TouchableOpacity>
         </View>
+        <Toast ref={toastRef} />
       </ScrollView>
     </SafeAreaView>
   )
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    backgroundColor: COLORS.BG_BLACK,
+    color: 'white',
+    flex: 1,
+  },
   title: {
     color: '#fff',
     fontSize: 12,
