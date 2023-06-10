@@ -12,59 +12,55 @@ const questions: string[] = [
   '어떤 기분이셨나요?',
   '그 때의 시간은 언제였나요?',
   '마지막으로 날씨는 어땠나요?',
-];
+]
 
 const ChatPage = ({navigation}) => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState<{ question: string; answer: string }[]>([]);
-    const [inputText, setInputText] = useState('');
-    const [keyboardHeight, setKeyboardHeight] = useState(0);
-    const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [answers, setAnswers] = useState<{question: string; answer: string}[]>([])
+  const [inputText, setInputText] = useState('')
+  const [keyboardHeight, setKeyboardHeight] = useState(0)
+  const [isFocused, setIsFocused] = useState<boolean>(false)
   useEffect(() => {
     if (!currentQuestion) {
-      navigation.navigate('Result');
+      navigation.navigate('Result')
     }
-}, [currentQuestionIndex, navigation, questions]);
+  }, [currentQuestionIndex, navigation, questions])
   const handleAnswer = () => {
-    const answer = inputText.trim();
+    const answer = inputText.trim()
     if (answer !== '') {
-      const answerObj = { question: questions[currentQuestionIndex], answer };
-      setAnswers((prevAnswers) => [...prevAnswers, answerObj]);
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      setInputText('');
+      const answerObj = {question: questions[currentQuestionIndex], answer}
+      setAnswers(prevAnswers => [...prevAnswers, answerObj])
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1)
+      setInputText('')
     }
-  };
-    // 키보드
-    const onKeyboardDidshow = (e: KeyboardEvent) => {
-        setKeyboardHeight(e.endCoordinates.height);
-      };
-      useEffect(() => {
-        const showSubscription = Keyboard.addListener(
-          'keyboardDidShow',
-          onKeyboardDidshow,
-        );
-        return () => {
-          showSubscription.remove();
-        };
-      }, []);
-      // Input Focus
-      const onInputFocus = () => {
-        setIsFocused(true);
-      };
-      const onInputFocusOut = () => {
-        setIsFocused(false);
-        Keyboard.dismiss();
-      };
-  const currentQuestion = questions[currentQuestionIndex];
+  }
+  // 키보드
+  const onKeyboardDidshow = (e: KeyboardEvent) => {
+    setKeyboardHeight(e.endCoordinates.height)
+  }
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', onKeyboardDidshow)
+    return () => {
+      showSubscription.remove()
+    }
+  }, [])
+  // Input Focus
+  const onInputFocus = () => {
+    setIsFocused(true)
+  }
+  const onInputFocusOut = () => {
+    setIsFocused(false)
+    Keyboard.dismiss()
+  }
+  const currentQuestion = questions[currentQuestionIndex]
   console.log(answers)
   return (
     <View style={[{ flex: 1 }, commonStyles.container]}>
       <ScrollView style={styles.container}>
-        
         {answers.map((answer, index) => (
           <View key={index}>
             <SystemChat text={answer.question} />
-            <View style={{ alignItems: 'flex-end' }}>
+            <View style={{alignItems: 'flex-end'}}>
               <MyChat text={answer.answer} />
             </View>
           </View>
@@ -87,12 +83,14 @@ const ChatPage = ({navigation}) => {
           </View>
           <View style={styles.chatBar} />
         </View>
-        <View style={{ flexDirection: 'row' }}>
-          <View style={{ width: '90%' }} >
-            <CustomInput 
-               onFocus={onInputFocus}
-               onBlur={onInputFocusOut}
-                value={inputText} onChangeText={setInputText} />
+        <View style={{flexDirection: 'row'}}>
+          <View style={{width: '90%'}}>
+            <CustomInput
+              onFocus={onInputFocus}
+              onBlur={onInputFocusOut}
+              value={inputText}
+              onChangeText={setInputText}
+            />
           </View>
           <TouchableOpacity style={styles.BtnBox} onPress={handleAnswer}>
             <Text style={styles.submitBtn}>전송</Text>
@@ -100,10 +98,10 @@ const ChatPage = ({navigation}) => {
         </View>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default ChatPage;
+export default ChatPage
 
 const styles = StyleSheet.create({
   container: {
@@ -140,4 +138,4 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 17,
   },
-});
+})
