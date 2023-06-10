@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import ChatBarIcon from '../../assets/svg/ChatBarIcon';
 import COLORS from '../../styles/colors';
@@ -14,11 +14,16 @@ const questions: string[] = [
   '마지막으로 날씨는 어땠나요?',
 ];
 
-const ChatPage = () => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<{ question: string; answer: string }[]>([]);
-  const [inputText, setInputText] = useState('');
+const ChatPage = ({navigation}) => {
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [answers, setAnswers] = useState<{ question: string; answer: string }[]>([]);
+    const [inputText, setInputText] = useState('');
 
+  useEffect(() => {
+    if (!currentQuestion) {
+      navigation.navigate('Result');
+    }
+}, [currentQuestionIndex, navigation, questions]);
   const handleAnswer = () => {
     const answer = inputText.trim();
     if (answer !== '') {

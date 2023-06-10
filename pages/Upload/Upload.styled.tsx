@@ -1,7 +1,11 @@
 import styled from 'styled-components/native'
+import COLORS from '../../styles/colors'
 
 export const Container = styled.View`
   padding: 0 10px;
+  backgroundColor: ${COLORS.BG_BLACK};
+  color: 'white';
+  flex: 1;
 `
 
 export const Title = styled.Text`
