@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import {NavigationContainer} from '@react-navigation/native'
 import useRememoryFonts from './infrastructures/hooks/useRememoryFonts'
 import Pages from './pages'
 import { commonStyles } from "./styles/common"
-import LoadingAnimation from "./components/LoadingAnimation"
 
 export default function App() {
   const { fontsLoaded } = useRememoryFonts()
@@ -41,22 +41,10 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <Pages />
-      <LoadingAnimation/>
+    <SafeAreaProvider >
+      <NavigationContainer>
+        <Pages />
+      </NavigationContainer>
     </SafeAreaProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  font: {
-    fontFamily: 'Pretendard-Bold',
-    fontSize: 14,
-  },
-})

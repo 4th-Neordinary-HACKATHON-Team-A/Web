@@ -1,15 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
-import {StyleSheet, Text, View} from 'react-native'
-import { commonStyles } from "../styles/common"
 import Home from '../pages/Home/Home'
-
 const Stack = createStackNavigator()
 
 const Pages = () => {
-  return <View>
-    <Stack.Screen name="home" component={Home} />
-  </View>
+  return (
+    <Stack.Navigator screenOptions={{headerShown: true}}>
+      <Stack.Screen name="home" component={Home} />
+    </Stack.Navigator>
+  )
 }
 
 export default Pages

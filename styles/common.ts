@@ -4,7 +4,7 @@ export const commonStyles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingTop: 40,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     flex: 1,
   },
   title: {
