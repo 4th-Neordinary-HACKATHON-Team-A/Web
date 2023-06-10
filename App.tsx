@@ -15,6 +15,7 @@ export default function App() {
   return (
     <SafeAreaProvider style={commonStyles.container}>
       <Pages />
+      <LoadingAnimation/>
     </SafeAreaProvider>
   )
 }
