@@ -1,6 +1,11 @@
 import styled from 'styled-components/native'
+import COLORS from '../../styles/colors'
 
-export const Container = styled.View``
+export const Container = styled.View`
+  background-color: ${COLORS.BG_BLACK};
+  height: 100%;
+  padding: 0 30px;
+`
 
 export const Title = styled.Text`
   margin-bottom: 30px;
@@ -10,6 +15,8 @@ export const Title = styled.Text`
 `
 
 export const Main = styled.View`
+  background-color: ${COLORS.BG_BLACK};
+
   display: flex;
   flex-direction: row;
   justify-content: center;
