@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { TouchableOpacity, Text, StyleSheet, View, ImageBackground, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {commonStyles} from '../styles/common'
 import {PurpleFullButton} from '../components/Button'
 import COLORS from '../styles/colors'
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 const Result = ({navigation}) => {
+  const toastRef = useRef<Toast>(null);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -28,10 +30,15 @@ const Result = ({navigation}) => {
           <TouchableOpacity style={styles.button}>
             <Text style={styles.textStyle}>다시 작성하기</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => {
+            if (toastRef.current) {
+              toastRef.current.show('그림이 저장되었습니다.', 2000);
+            }
+          }}>
             <Text style={styles.textStyle}>그림 저장하기</Text>
           </TouchableOpacity>
         </View>
+        <Toast ref={toastRef} />
       </ScrollView>
     </SafeAreaView>
   )
