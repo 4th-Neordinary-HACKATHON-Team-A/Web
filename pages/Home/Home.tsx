@@ -17,9 +17,6 @@ const Home = ({navigation}) => {
     })
   }, [])
   
-import { FontFamily } from '../../types/fontFamily'
-
-const Home = ({navigation}) => {
   return (
     <ScrollView style={[styles.container, commonStyles.container]}>
       <Image source={require('../../assets/img/main_welcome.png')} style={styles.mainImg} />
