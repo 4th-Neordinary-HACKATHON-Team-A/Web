@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Keyboard, Platform, KeyboardEvent } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Keyboard, Platform, KeyboardEvent, ScrollView } from 'react-native';
 import ChatBarIcon from '../../assets/svg/ChatBarIcon';
 import COLORS from '../../styles/colors';
 import { SystemChat, MyChat } from '../../components/Chat';
@@ -59,7 +59,7 @@ const ChatPage = ({navigation}) => {
   console.log(answers)
   return (
     <View style={[{ flex: 1 }, commonStyles.container]}>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         
         {answers.map((answer, index) => (
           <View key={index}>
@@ -70,17 +70,16 @@ const ChatPage = ({navigation}) => {
           </View>
         ))}
         {currentQuestion ? <SystemChat text={currentQuestion} />: <SystemChat text='준비된 질문이 끝났습니다. 이제 추억을 그려드릴게요'/>}
-      </View>
+      </ScrollView>
       <View style={[styles.footer, {
-              paddingLeft: 24,
-              paddingBottom: isFocused
-                ? Platform.OS == 'ios'
-                  ? keyboardHeight
-                  : 10
-                : Platform.OS === 'ios'
-                ? 20
-                : 0,
-            }]}>
+        paddingBottom: isFocused
+          ? Platform.OS == 'ios'
+            ? keyboardHeight
+            : 10
+          : Platform.OS === 'ios'
+          ? 20
+          : 0,
+      }]}>
         <View style={styles.chatBarBox}>
           <View style={styles.chatBar} />
           <View style={styles.chatBarIcon}>
