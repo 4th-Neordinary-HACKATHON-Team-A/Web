@@ -5,9 +5,7 @@ import {StyleSheet, Text, View} from 'react-native'
 const Stack = createStackNavigator()
 
 const Pages = () => {
-  return (
-    <Text>index</Text>
-  )
+  return <Text style={{color: '#000', alignItems: 'center', justifyContent: 'center'}}>index</Text>
 }
 
 export default Pages
