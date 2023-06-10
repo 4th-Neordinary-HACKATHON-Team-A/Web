@@ -1,5 +1,6 @@
 import { GestureResponderEvent, TouchableOpacity, Text, StyleSheet } from "react-native";
 import COLORS from "../styles/colors";
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface Props {
     textStyle: Object;
@@ -17,9 +18,15 @@ interface ButtonProps {
 export const CustomButton = ({style, textStyle, text, onClick=()=>{}}: Props) => {
     return (
         <TouchableOpacity
-        style={[style, {justifyContent: 'center', alignItems: 'center'}]}
         onPress={e => onClick(e)}>
-            <Text style={textStyle}>{text}</Text>
+            <LinearGradient 
+            // start={{x: 0.6, y: 0.1}} end={{x: 0.7, y: 1}}
+            start={{x: 0.6, y: 0.1}} end={{x: 0.9, y: 1}}
+            style={[style, {justifyContent: 'center', alignItems: 'center'}]}
+            colors={[COLORS.PURPLE_100, '#1D1D1D']}>
+                <Text style={textStyle}>{text}</Text>
+            </LinearGradient>
+            
         </TouchableOpacity>
     );
 }
@@ -39,7 +46,6 @@ export const PurpleFullButton = ({width=253, height=68, text, onClick=()=>{}}: B
 const styles = StyleSheet.create({
     purpleFullButton: {
         borderRadius: 34,
-        backgroundColor: COLORS.PURPLE_100,
     },
     whiteText: {
         color: '#FFFFFF',
