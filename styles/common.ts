@@ -1,11 +1,13 @@
 import {StyleSheet} from 'react-native'
 import {FontFamily} from '../types/fontFamily'
+import COLORS from './colors'
 
 export const commonStyles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingTop: 40,
-    backgroundColor: 'black',
+    backgroundColor: COLORS.BG_BLACK,
+    color: 'white',
     flex: 1,
   },
   title: {
