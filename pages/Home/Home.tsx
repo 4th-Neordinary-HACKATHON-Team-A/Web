@@ -1,19 +1,28 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Text, Image, View, StyleSheet, Dimensions, Button, TouchableOpacity} from 'react-native'
 import COLORS from '../../styles/colors'
 import {CustomButton} from '../../components/Button'
 import {commonStyles} from '../../styles/common'
 
 import CategoryScrollView from './CategoryScrollView'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Home = () => {
+  const [nickname, setNickname] = useState('')
+
+  useEffect(() => {
+    AsyncStorage.getItem('nickname').then(nickname => {
+      setNickname(nickname ?? 'user')
+    })
+  }, [])
+  
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/img/main_welcome.png')} style={styles.mainImg} />
       <View style={styles.welcome}>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <Text style={{...styles.welcomeText, fontWeight: 'bold'}}>K-인어공주</Text>
-          <Text style={styles.welcomeText}>님,</Text>
+          <Text style={styles.welcomeText}>{nickname}님,</Text>
         </View>
         <Text style={styles.welcomeText}>환영합니다!</Text>
       </View>
