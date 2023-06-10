@@ -8,7 +8,7 @@ const Categories = () => {
       <C.Title>🔗 카테고리</C.Title>
       <C.Main>
         {categories.map(category => (
-          <C.Item>
+          <C.Item key={category.name}>
             <C.Icon source={category.imgSrc} />
             <C.Name>{category.name}</C.Name>
           </C.Item>
