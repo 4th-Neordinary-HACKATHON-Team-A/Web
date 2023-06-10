@@ -14,8 +14,8 @@ export const Item = styled.TouchableOpacity`
 `
 
 export const Icon = styled.Image`
-  width: 80px;
-  height: 80px;
+  width: 57px;
+  height: 57px;
   border-radius: 9999px;
   overflow: 'hidden';
 `
