@@ -22,6 +22,7 @@ export const SystemChat = ({text}: ChatProps) => {
 
 const styles = StyleSheet.create({
     myBox: {
+        maxWidth: 213,
         backgroundColor: '#FFF',
         paddingHorizontal: 16,
         paddingVertical: 8,
@@ -33,6 +34,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     systemBox: {
+        maxWidth: 213,
         backgroundColor: COLORS.PURPLE_100,
         paddingHorizontal: 16,
         paddingVertical: 8,
