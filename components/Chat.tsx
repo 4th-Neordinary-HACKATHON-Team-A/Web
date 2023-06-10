@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
+import ChatIcon from "../assets/svg/ChatIcon";
 import COLORS from "../styles/colors";
 
 interface ChatProps {
@@ -14,14 +15,18 @@ export const MyChat = ({text}: ChatProps) => {
 }
 export const SystemChat = ({text}: ChatProps) => {
     return (
-        <View style={styles.systemBox}>
-            <Text style={styles.systemText}>{text}</Text>
+        <View style={{flexDirection: 'row'}}>
+            <ChatIcon />
+            <View style={styles.systemBox}>
+                <Text style={styles.systemText}>{text}</Text>
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     myBox: {
+        maxWidth: 213,
         backgroundColor: '#FFF',
         paddingHorizontal: 16,
         paddingVertical: 8,
@@ -33,10 +38,12 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     systemBox: {
+        maxWidth: 213,
         backgroundColor: COLORS.PURPLE_100,
         paddingHorizontal: 16,
         paddingVertical: 8,
         borderRadius: 20,
+        marginLeft: 6,
     },
     systemText: {
         color: '#FFF',
