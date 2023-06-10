@@ -1,15 +1,10 @@
-import React from 'react'
-import {createStackNavigator} from '@react-navigation/stack'
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native'
-import CustomInput from '../components/CustomInput'
-import ChatBarIcon from '../assets/svg/ChatBarIcon'
-import COLORS from '../styles/colors'
+import ChatBarIcon from '../../assets/svg/ChatBarIcon';
+import CustomInput from '../../components/CustomInput';
+import COLORS from '../../styles/colors';
 
-const Stack = createStackNavigator()
-
-const ChatPage = () => {
-  return (
-    <View style={{flex: 1}}>
+export const ChatBottom = () => {
+    return (
         <View style={styles.footer}>
             <View style={styles.chatBarBox} >
                 <View style={styles.chatBar}/>
@@ -25,11 +20,8 @@ const ChatPage = () => {
                 </TouchableOpacity>
             </View>
         </View>
-    </View>
-  )
+    )
 }
-
-export default ChatPage;
 
 const styles = StyleSheet.create({
     BtnBox: {
@@ -63,3 +55,5 @@ const styles = StyleSheet.create({
         bottom: 20,
     }
 })
+
+export default ChatBottom;
