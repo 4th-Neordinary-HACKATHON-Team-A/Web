@@ -1,18 +1,48 @@
+import React, { useState, useEffect, useCallback } from 'react'
 import {StyleSheet, Text, View} from 'react-native'
-import useRememoryFonts from "./infrastructures/hooks/useRememoryFonts"
+import * as SplashScreen from 'expo-splash-screen'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import useRememoryFonts from './infrastructures/hooks/useRememoryFonts'
+import Pages from './pages'
+import { commonStyles } from "./styles/common"
 
 export default function App() {
-  const { fontsLoaded } = useRememoryFonts();
+  const { fontsLoaded } = useRememoryFonts()
+  const [appIsReady, setAppIsReady] = useState(false)
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync()
+    }
+  }, [appIsReady])
+
+  if (!appIsReady) {
+    return null
+  }
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.font}>폰트체크</Text>
-      <Text style={styles.font}>Font Check 123 </Text>
-    </View>
+    <SafeAreaProvider>
+      <Pages />
+    </SafeAreaProvider>
   )
 }
 
@@ -26,5 +56,5 @@ const styles = StyleSheet.create({
   font: {
     fontFamily: 'Pretendard-Bold',
     fontSize: 14,
-  }
+  },
 })
