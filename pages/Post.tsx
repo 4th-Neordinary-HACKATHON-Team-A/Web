@@ -3,22 +3,25 @@ import {Text, StyleSheet, View, ImageBackground, Image} from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import {LinearGradient} from 'expo-linear-gradient'
 import {commonStyles} from '../styles/common'
-import COLORS from "../styles/colors"
-import HeartButton from "./../components/HeartButton";
+import COLORS from '../styles/colors'
+import HeartButton from './../components/HeartButton'
+import CommentList from './CommentList'
+import {styled} from 'styled-components/native'
+import ChatIconSmall from '../assets/svg/ChatIconSmall'
 interface PostProps {
   likeCount?: number
-  title: string
+  title?: string
   content?: string
-  nickname: string
+  nickname?: string
   time?: number
-  source: string
-  category: string | string[]
+  source?: string
+  category?: string | string[]
 }
 
-const Post = ({likeCount, title, content, nickname, time, source, category} : PostProps) => {
+const Post = ({likeCount, title, content, nickname, time, source, category}: PostProps) => {
   const [like, setLike] = useState(false)
 
-  const toggleLike = async (e) => {
+  const toggleLike = async e => {
     setLike(!like)
   }
   return (
@@ -34,28 +37,35 @@ const Post = ({likeCount, title, content, nickname, time, source, category} : Po
           <Image source={require('../assets/img/ic-share.png')} style={styles.likeButton} />
         </View>
         <View style={styles.titleBox}>
-          <Text style={styles.titleText}>
-            {title}
-          </Text>
+          <Text style={styles.titleText}>{title}</Text>
           <Text style={styles.timeText}>{time}분전</Text>
         </View>
-        <Text style={styles.contentText}>
-          {content}
-        </Text>
+        <Text style={styles.contentText}>{content}</Text>
         <LinearGradient
-        // start={{x: 0.6, y: 0.1}} end={{x: 0.7, y: 1}}
-        start={{x: 0.6, y: 0.1}}
-        end={{x: 0.9, y: 1}}
-        style={styles.category}
-        colors={[COLORS.PURPLE_100, '#1D1D1D']}
-      >
+          // start={{x: 0.6, y: 0.1}} end={{x: 0.7, y: 1}}
+          start={{x: 0.6, y: 0.1}}
+          end={{x: 0.9, y: 1}}
+          style={styles.category}
+          colors={[COLORS.PURPLE_100, '#1D1D1D']}
+        >
           <Text style={styles.categotyText}>#여행</Text>
         </LinearGradient>
-      <Text style={styles.nicknameText}>by {nickname}</Text>
+        <Text style={styles.nicknameText}>by {nickname}</Text>
       </View>
+      <TextFieldWrapper>
+        <ChatIconSmall />
+        <TextField placeholder='댓글 달기...' />
+      </TextFieldWrapper>
+      <CommentList
+        comments={[
+          {title: '자료구조론 에이쁠 받고 싶어요', desc: '초등학생 때 어디에서 사셨나요..'},
+          {title: '자료구조론 에이쁠 받고 싶어요', desc: '초등학생 때 어디에서 사셨나요..'},
+          {title: '자료구조론 에이쁠 받고 싶어요', desc: '초등학생 때 어디에서 사셨나요..'},
+        ]}
+      />
     </SafeAreaView>
   )
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -127,8 +137,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.PURPLE_100,
     borderRadius: 12,
     borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: 'white'
+    borderStyle: 'solid',
+    borderColor: 'white',
   },
   categotyText: {
     color: 'white',
@@ -136,5 +146,20 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
 })
+
+const TextFieldWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 20px;
+`
+
+const TextField = styled.TextInput`
+  padding: 6px;
+  font-size: 11px;
+  font-weight: 400;
+  color: black;
+`
 
 export default Post
