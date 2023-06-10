@@ -33,7 +33,9 @@ export const SelectChat = (type: any) => {
         <View style={{flexDirection: 'row'}}>
             <ChatIcon />
             <View style={styles.systemBox}>
-                <Text style={[styles.systemText, {marginBottom: 8}]}>어떤 내용을 다시 쓰고 싶으신가요?</Text>
+                <Text style={[styles.systemText, {marginBottom: 8}]}>
+                    {type.type=='options'? '어떤 내용을 다시 쓰고 싶으신가요?': '다른 것도 다시 쓰고 싶으신가요?'}    
+                </Text>
                 <FlatList
                 data={type.type=='options'? options: choice}
                 keyExtractor={(item, index) => index.toString()}
