@@ -3,10 +3,11 @@ import { TouchableOpacity, Text, StyleSheet, View, ImageBackground, ScrollView }
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {commonStyles} from '../styles/common'
 import {PurpleFullButton} from '../components/Button'
+import COLORS from '../styles/colors'
 
 const Result = ({navigation}) => {
   return (
-    <SafeAreaView style={commonStyles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <Text style={{...commonStyles.title, paddingTop: 24}}>당신의 어렴풋한 추억이 생생해졌나요?</Text>
         <Text style={styles.title}>⦁ 추억 내용</Text>
@@ -18,11 +19,11 @@ const Result = ({navigation}) => {
         </Text>
         <Text style={styles.title}>⦁ 추억 이미지</Text>
         <ImageBackground
-          source={require('../assets/image-temp.jpg')}
+          source={require('../assets/img/result.png')}
           resizeMode='cover'
           style={styles.image}
         ></ImageBackground>
-        <PurpleFullButton text='그림 업로드 하기' onClick={()=>{navigation.navigate('Upload')}}/>
+        <PurpleFullButton width={310} height={56} text='그림 업로드 하기' onClick={()=>{navigation.navigate('Upload')}}/>
         <View style={styles.buttonBox}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.textStyle}>다시 작성하기</Text>
@@ -37,6 +38,12 @@ const Result = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    backgroundColor: COLORS.BG_BLACK,
+    color: 'white',
+    flex: 1,
+  },
   title: {
     color: '#fff',
     fontSize: 12,
