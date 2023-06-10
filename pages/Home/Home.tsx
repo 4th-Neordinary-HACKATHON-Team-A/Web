@@ -5,10 +5,11 @@ import {CustomButton} from '../../components/Button'
 import {commonStyles} from '../../styles/common'
 
 import CategoryScrollView from './CategoryScrollView'
+import { FontFamily } from '../../types/fontFamily'
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, commonStyles.container]}>
       <Image source={require('../../assets/img/main_welcome.png')} style={styles.mainImg} />
       <View style={styles.welcome}>
         <View style={{display: 'flex', flexDirection: 'row'}}>
@@ -18,7 +19,7 @@ const Home = () => {
         <Text style={styles.welcomeText}>환영합니다!</Text>
       </View>
       <View style={styles.flexCenterWrapper}>
-        <CustomButton text='추억 생성하러 가기' style={styles.puppleBtn} textStyle={styles.puppleBtnText} />
+        <CustomButton onClick={()=>navigation.navigate('Chat')} text='추억 생성하러 가기' style={styles.puppleBtn} textStyle={styles.puppleBtnText} />
       </View>
       <View style={styles.main}>
         <View style={styles.titleHeader}>
