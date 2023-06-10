@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Keyboard, Platform, KeyboardEvent } from 'react-native';
 import ChatBarIcon from '../../assets/svg/ChatBarIcon';
 import COLORS from '../../styles/colors';
 import { SystemChat, MyChat } from '../../components/Chat';
@@ -18,7 +18,8 @@ const ChatPage = ({navigation}) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<{ question: string; answer: string }[]>([]);
     const [inputText, setInputText] = useState('');
-
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const [isFocused, setIsFocused] = useState<boolean>(false);
   useEffect(() => {
     if (!currentQuestion) {
       navigation.navigate('Result');
@@ -33,7 +34,27 @@ const ChatPage = ({navigation}) => {
       setInputText('');
     }
   };
-
+    // 키보드
+    const onKeyboardDidshow = (e: KeyboardEvent) => {
+        setKeyboardHeight(e.endCoordinates.height);
+      };
+      useEffect(() => {
+        const showSubscription = Keyboard.addListener(
+          'keyboardDidShow',
+          onKeyboardDidshow,
+        );
+        return () => {
+          showSubscription.remove();
+        };
+      }, []);
+      // Input Focus
+      const onInputFocus = () => {
+        setIsFocused(true);
+      };
+      const onInputFocusOut = () => {
+        setIsFocused(false);
+        Keyboard.dismiss();
+      };
   const currentQuestion = questions[currentQuestionIndex];
   console.log(answers)
   return (
@@ -50,7 +71,16 @@ const ChatPage = ({navigation}) => {
         ))}
         {currentQuestion ? <SystemChat text={currentQuestion} />: <SystemChat text='준비된 질문이 끝났습니다. 이제 추억을 그려드릴게요'/>}
       </View>
-      <View style={styles.footer}>
+      <View style={[styles.footer, {
+              paddingLeft: 24,
+              paddingBottom: isFocused
+                ? Platform.OS == 'ios'
+                  ? keyboardHeight
+                  : 10
+                : Platform.OS === 'ios'
+                ? 20
+                : 0,
+            }]}>
         <View style={styles.chatBarBox}>
           <View style={styles.chatBar} />
           <View style={styles.chatBarIcon}>
@@ -59,8 +89,11 @@ const ChatPage = ({navigation}) => {
           <View style={styles.chatBar} />
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <View style={{ width: '90%' }}>
-            <CustomInput value={inputText} onChangeText={setInputText} />
+          <View style={{ width: '90%' }} >
+            <CustomInput 
+               onFocus={onInputFocus}
+               onBlur={onInputFocusOut}
+                value={inputText} onChangeText={setInputText} />
           </View>
           <TouchableOpacity style={styles.BtnBox} onPress={handleAnswer}>
             <Text style={styles.submitBtn}>전송</Text>
