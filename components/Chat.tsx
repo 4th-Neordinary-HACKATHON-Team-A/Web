@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 8,
         borderRadius: 20,
+        marginBottom: 5,
     },
     myText: {
         color: '#000',
@@ -88,6 +89,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         borderRadius: 20,
         marginLeft: 6,
+        marginBottom: 5,
     },
     systemText: {
         color: '#FFF',
@@ -101,7 +103,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         borderRadius: 5,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 5,
     },
     optionText: {
         fontSize: 14,

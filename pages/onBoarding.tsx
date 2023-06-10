@@ -7,10 +7,11 @@ import ChatIcon from '../assets/svg/ChatIcon'
 import { LinearGradient } from 'expo-linear-gradient';
 import COLORS from '../styles/colors'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { commonStyles } from '../styles/common'
 
 const Stack = createStackNavigator()
 
-const OnBoarding = () => {
+const OnBoarding = ({navigation}) => {
     const [inputText, setInputText] = useState<string>('');
     const handleSaveText = async () => {
         console.log("GO")
@@ -20,12 +21,15 @@ const OnBoarding = () => {
         } catch (error) {
           console.log('Error saving text: ', error);
         }
+        navigation.navigate('Home')
       };
   return (
-    <View style={{alignItems: "center", marginTop: 158}}>
+    <View style={[{alignItems: "center"}, commonStyles.container]}>
+        <View style={{marginTop: 158}}>
         <Image 
-        style={{ width: 140, height: 115 }}
+        style={{ width: 140, height: 115}}
         source={require('../assets/img/Logo.png')} />
+        </View>
         <View style={styles.inputBox}>
             <TextInput
             onChangeText={setInputText}
