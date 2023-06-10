@@ -13,18 +13,11 @@ export const Item = styled.TouchableOpacity`
   /* margin-right: 13px; */
 `
 
-export const IconWrapper = styled.View`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 57px;
-  height: 57px;
+export const Icon = styled.Image`
+  width: 80px;
+  height: 80px;
   border-radius: 9999px;
   overflow: 'hidden';
-`
-export const Icon = styled.Image`
-  width: 36px;
-  height: 36px;
 `
 export const Name = styled.Text`
   color: white;

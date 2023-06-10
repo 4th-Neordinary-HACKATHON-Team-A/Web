@@ -9,9 +9,7 @@ const CategoryScrollView = () => {
       <ScrollView horizontal contentContainerStyle={{columnGap: 13}}>
         {categories.map(category => (
           <C.Item key={category.name}>
-            <C.IconWrapper>
-              <C.Icon source={category.imgSrc} resizeMode='cover' />
-            </C.IconWrapper>
+            <C.Icon source={category.imgSrc} resizeMode='cover' />
             <C.Name>{category.name}</C.Name>
           </C.Item>
         ))}
