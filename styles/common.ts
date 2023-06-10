@@ -13,6 +13,7 @@ export const commonStyles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontFamily: FontFamily.pretendardBold,
+    color: 'white',
   },
   titleWrapper: {
     paddingVertical: 20,

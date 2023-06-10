@@ -1,6 +1,7 @@
 import {Text} from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
-import {SafeAreaProvider} from 'react-native-safe-area-context'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import {NavigationContainer} from '@react-navigation/native'
 import useRememoryFonts from './infrastructures/hooks/useRememoryFonts'
 import Pages from './pages'
 import {commonStyles} from './styles/common'
@@ -22,7 +23,6 @@ export default function App() {
   }
 
   return (
-    
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
          headerStyle: {
