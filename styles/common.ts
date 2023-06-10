@@ -1,15 +1,16 @@
 import {StyleSheet} from 'react-native'
+import {FontFamily} from '../types/fontFamily'
 
 export const commonStyles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingTop: 40,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     flex: 1,
   },
   title: {
     fontSize: 20,
-    fontFamily: 'Pretendard-SemiBold',
+    fontFamily: FontFamily.pretendardBold,
   },
   titleWrapper: {
     paddingVertical: 20,
