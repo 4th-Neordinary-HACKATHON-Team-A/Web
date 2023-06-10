@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native'
-import useRememoryFonts from "./infrastructures/hooks/useRememoryFonts"
+import useRememoryFonts from './infrastructures/hooks/useRememoryFonts'
 
 export default function App() {
-  const { fontsLoaded } = useRememoryFonts();
+  const {fontsLoaded} = useRememoryFonts()
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>
@@ -19,12 +19,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },
   font: {
     fontFamily: 'Pretendard-Bold',
     fontSize: 14,
-  }
+  },
 })
