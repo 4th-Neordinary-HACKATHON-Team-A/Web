@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, Image, View, StyleSheet, Dimensions, Button, TouchableOpacity} from 'react-native'
+import {Text, Image, View, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView } from 'react-native'
 import COLORS from '../../styles/colors'
 import {CustomButton} from '../../components/Button'
 import {commonStyles} from '../../styles/common'
@@ -9,7 +9,7 @@ import { FontFamily } from '../../types/fontFamily'
 
 const Home = ({navigation}) => {
   return (
-    <View style={[styles.container, commonStyles.container]}>
+    <ScrollView style={[styles.container, commonStyles.container]}>
       <Image source={require('../../assets/img/main_welcome.png')} style={styles.mainImg} />
       <View style={styles.welcome}>
         <View style={{display: 'flex', flexDirection: 'row'}}>
@@ -24,7 +24,7 @@ const Home = ({navigation}) => {
       <View style={styles.main}>
         <View style={styles.titleHeader}>
           <Text style={{...commonStyles.title, color: 'white'}}>카테고리 별로 모아보고 싶다면?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('Category')}>
             <Text style={styles.more}>더보기</Text>
           </TouchableOpacity>
         </View>
@@ -36,7 +36,7 @@ const Home = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
