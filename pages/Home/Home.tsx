@@ -1,4 +1,4 @@
-import {Text, Image, View, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView } from 'react-native'
+import {Text, Image, View, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView} from 'react-native'
 import React, {useEffect, useState} from 'react'
 
 import COLORS from '../../styles/colors'
@@ -16,7 +16,7 @@ const Home = ({navigation}) => {
       setNickname(nickname ?? 'user')
     })
   }, [])
-  
+
   return (
     <ScrollView style={[styles.container, commonStyles.container]}>
       <Image source={require('../../assets/img/main_welcome.png')} style={styles.mainImg} />
@@ -28,12 +28,17 @@ const Home = ({navigation}) => {
         <Text style={styles.welcomeText}>환영합니다!</Text>
       </View>
       <View style={styles.flexCenterWrapper}>
-        <CustomButton onClick={()=>navigation.navigate('Chat')} text='추억 생성하러 가기' style={styles.puppleBtn} textStyle={styles.puppleBtnText} />
+        <CustomButton
+          onClick={() => navigation.navigate('Chat')}
+          text='추억 생성하러 가기'
+          style={styles.puppleBtn}
+          textStyle={styles.puppleBtnText}
+        />
       </View>
       <View style={styles.main}>
         <View style={styles.titleHeader}>
           <Text style={{...commonStyles.title, color: 'white'}}>카테고리 별로 모아보고 싶다면?</Text>
-          <TouchableOpacity onPress={()=>navigation.navigate('Category')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Category')}>
             <Text style={styles.more}>더보기</Text>
           </TouchableOpacity>
         </View>

@@ -17,7 +17,6 @@ export const Icon = styled.Image`
   width: 57px;
   height: 57px;
   border-radius: 9999px;
-  overflow: 'hidden';
 `
 export const Name = styled.Text`
   color: white;
