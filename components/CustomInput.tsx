@@ -2,12 +2,12 @@ import {StyleSheet, TextInput} from 'react-native'
 import {FontFamily} from '../types/fontFamily'
 
 interface Props {
-  value: string;
-  onChangeText: (text: string) => void;
+  value: string
+  onChangeText: (text: string) => void
   placeHolder?: string
 }
 
-export default function CustomInput({ value, onChangeText, placeHolder }: Props) {
+export default function CustomInput({value, onChangeText, placeHolder}: Props) {
   const styles = StyleSheet.create({
     input: {
       width: '100%',
@@ -21,9 +21,5 @@ export default function CustomInput({ value, onChangeText, placeHolder }: Props)
       fontWeight: '500',
     },
   })
-  return <TextInput 
-  value={value}
-  onChangeText={onChangeText}
-  style={styles.input} 
-  placeholder={placeHolder} />
+  return <TextInput value={value} onChangeText={onChangeText} style={styles.input} placeholder={placeHolder} />
 }
