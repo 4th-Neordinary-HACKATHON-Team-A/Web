@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native'
 export const commonStyles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
-    paddingTop: 12,
+    paddingTop: 40,
     backgroundColor: 'white',
     flex: 1,
   },
