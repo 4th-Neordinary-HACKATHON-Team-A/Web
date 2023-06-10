@@ -5,6 +5,7 @@ interface CardProps {
   title?: string;
   name: string;
   time?: number;
+  source: string;
 }
 const MemoryCard = ({ title, name, time }: CardProps) => {
   return (
