@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
-import Home from '../pages/Home/Home'
+import {StyleSheet, Text, View} from 'react-native'
+import {commonStyles} from '../styles/common'
+import Home from './Home/home'
+
 const Stack = createStackNavigator()
 
 const Pages = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: true}}>
-      <Stack.Screen name="home" component={Home} />
-    </Stack.Navigator>
+    <View>
+      {/* <Stack.Screen name='home' component={Home} /> */}
+      <Home />
+    </View>
   )
 }
 
