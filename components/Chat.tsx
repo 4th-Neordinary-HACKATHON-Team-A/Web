@@ -1,9 +1,51 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import ChatIcon from "../assets/svg/ChatIcon";
 import COLORS from "../styles/colors";
 
 interface ChatProps {
     text?: string;   
+}
+interface OptionProps {
+    text?: string;
+    value: number; 
+}
+const options = [
+    {text: '인물', value: 0},
+    {text: '장소', value: 1},
+    {text: '행동', value: 2},
+    {text: '기분', value: 3},
+    {text: '시간', value: 4},
+    {text: '날씨', value: 5}
+]
+const choice = [
+    {text: '네, 다시 쓸래요', value: 1},
+    {text: '아니요, 다 됐어요', value: 0}
+]
+const Options = ({text, value}: OptionProps) => {
+    return (
+        <View style={styles.optionBox}>
+            <Text style={styles.optionText}>{text}</Text>
+        </View>
+    )
+}
+export const SelectChat = (type: any) => {
+    return (
+        <View style={{flexDirection: 'row'}}>
+            <ChatIcon />
+            <View style={styles.systemBox}>
+                <Text style={[styles.systemText, {marginBottom: 8}]}>어떤 내용을 다시 쓰고 싶으신가요?</Text>
+                <FlatList
+                data={type.type=='options'? options: choice}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({item, index}) => {
+                    return (
+                        <Options text={item.text} value={item.value} />
+                    );
+                  }}
+                  />
+            </View>
+        </View>
+    )
 }
 
 export const MyChat = ({text}: ChatProps) => {
@@ -47,6 +89,19 @@ const styles = StyleSheet.create({
     },
     systemText: {
         color: '#FFF',
+        fontSize: 14,
+        fontWeight: '600',
+    },
+    optionBox: {
+        marginTop: 3,
+        width: 180,
+        height: 32,
+        backgroundColor: '#FFF',
+        borderRadius: 5,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    optionText: {
         fontSize: 14,
         fontWeight: '600',
     }
