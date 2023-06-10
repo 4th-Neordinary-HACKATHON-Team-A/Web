@@ -4,6 +4,7 @@ import ChatBarIcon from '../../assets/svg/ChatBarIcon';
 import COLORS from '../../styles/colors';
 import { SystemChat, MyChat } from '../../components/Chat';
 import CustomInput from '../../components/CustomInput';
+import { commonStyles } from '../../styles/common';
 
 const questions: string[] = [
   '어디에 있었나요?',
@@ -31,7 +32,7 @@ const ChatPage = () => {
   const currentQuestion = questions[currentQuestionIndex];
   console.log(answers)
   return (
-    <View style={{ flex: 1 }}>
+    <View style={[{ flex: 1 }, commonStyles.container]}>
       <View style={styles.container}>
         
         {answers.map((answer, index) => (

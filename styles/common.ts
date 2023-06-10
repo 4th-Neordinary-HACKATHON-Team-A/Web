@@ -4,7 +4,7 @@ import COLORS from './colors'
 
 export const commonStyles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     paddingTop: 40,
     backgroundColor: COLORS.BG_BLACK,
     color: 'white',
