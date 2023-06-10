@@ -24,8 +24,8 @@ const OnBoarding = ({navigation}) => {
         navigation.navigate('Home')
       };
   return (
-    <View style={[{alignItems: "center"}, commonStyles.container]}>
-        <View style={{marginTop: 158}}>
+    <View style={[{alignItems: "center", justifyContent: "center",}, commonStyles.container]}>
+        <View >
         <Image 
         style={{ width: 140, height: 115}}
         source={require('../assets/img/Logo.png')} />
