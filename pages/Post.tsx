@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Text, StyleSheet, View, ImageBackground, Image} from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import {LinearGradient} from 'expo-linear-gradient'
 import {commonStyles} from '../styles/common'
 import COLORS from "../styles/colors"
-
+import HeartButton from "./../components/HeartButton";
 interface PostProps {
   likeCount?: number
   title: string
@@ -16,13 +16,19 @@ interface PostProps {
 }
 
 const Post = ({likeCount, title, content, nickname, time, source, category} : PostProps) => {
+  const [like, setLike] = useState(false)
+
+  const toggleLike = async (e) => {
+    setLike(!like)
+  }
   return (
     <SafeAreaView>
       <ImageBackground source={require('../assets/image-temp.jpg')} resizeMode='cover' style={styles.image} />
       <View style={styles.container}>
         <View style={styles.likeBox}>
           <View style={styles.likeLeftBox}>
-            <Image source={require('../assets/img/ic-empty-like.png')} style={styles.likeButton} />
+            {/* <Image source={require('../assets/img/ic-empty-like.png')} style={styles.likeButton} /> */}
+            <HeartButton like={like} onPress={toggleLike} />
             <Text style={styles.likeText}>좋아요 {likeCount}개</Text>
           </View>
           <Image source={require('../assets/img/ic-share.png')} style={styles.likeButton} />
