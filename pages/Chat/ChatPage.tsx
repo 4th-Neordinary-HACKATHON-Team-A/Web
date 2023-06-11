@@ -1,10 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Keyboard, Platform, KeyboardEvent, ScrollView } from 'react-native';
-import ChatBarIcon from '../../assets/svg/ChatBarIcon';
-import COLORS from '../../styles/colors';
-import { SystemChat, MyChat } from '../../components/Chat';
-import CustomInput from '../../components/CustomInput';
-import { commonStyles } from '../../styles/common';
+import {useEffect, useState} from 'react'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+  Keyboard,
+  Platform,
+  KeyboardEvent,
+  ScrollView,
+} from 'react-native'
+import ChatBarIcon from '../../assets/svg/ChatBarIcon'
+import COLORS from '../../styles/colors'
+import {SystemChat, MyChat} from '../../components/Chat'
+import CustomInput from '../../components/CustomInput'
+import {commonStyles} from '../../styles/common'
+import LoadingAnimation from '../../components/LoadingAnimation'
 
 const questions: string[] = [
   '어디에 있었나요?',
@@ -22,7 +33,6 @@ const ChatPage = ({navigation}) => {
   const [isFocused, setIsFocused] = useState<boolean>(false)
   useEffect(() => {
     if (!currentQuestion) {
-      navigation.navigate('Result')
     }
   }, [currentQuestionIndex, navigation, questions])
   const handleAnswer = () => {
@@ -53,9 +63,10 @@ const ChatPage = ({navigation}) => {
     Keyboard.dismiss()
   }
   const currentQuestion = questions[currentQuestionIndex]
+  const isFinished = !questions[currentQuestionIndex]
   console.log(answers)
   return (
-    <View style={[{ flex: 1 }, commonStyles.container]}>
+    <View style={[{flex: 1}, commonStyles.container]}>
       <ScrollView style={styles.container}>
         {answers.map((answer, index) => (
           <View key={index}>
@@ -65,17 +76,30 @@ const ChatPage = ({navigation}) => {
             </View>
           </View>
         ))}
-        {currentQuestion ? <SystemChat text={currentQuestion} />: <SystemChat text='준비된 질문이 끝났습니다. 이제 추억을 그려드릴게요'/>}
+        {!isFinished ? (
+          <SystemChat text={currentQuestion} />
+        ) : (
+          <LoadingAnimation second={5} goNextPage={() => navigation.navigate('Result')} />
+        )}
+        {/* <SystemChat text='준비된 질문이 끝났습니다. 이제 추억을 그려드릴게요' /> */}
       </ScrollView>
-      <View style={[styles.footer, {
-        paddingBottom: isFocused
-          ? Platform.OS == 'ios'
-            ? keyboardHeight
-            : 10
-          : Platform.OS === 'ios'
-          ? 20
-          : 0,
-      }]}>
+      <View
+        style={[
+          styles.footer,
+          {
+            paddingBottom: isFocused ? (Platform.OS == 'ios' ? keyboardHeight : 10) : Platform.OS === 'ios' ? 20 : 0,
+          },
+        ]}
+      ></View>
+      <View
+        style={[
+          styles.footer,
+          {
+            paddingLeft: 24,
+            paddingBottom: isFocused ? (Platform.OS == 'ios' ? keyboardHeight : 10) : Platform.OS === 'ios' ? 20 : 0,
+          },
+        ]}
+      >
         <View style={styles.chatBarBox}>
           <View style={styles.chatBar} />
           <View style={styles.chatBarIcon}>
@@ -83,19 +107,21 @@ const ChatPage = ({navigation}) => {
           </View>
           <View style={styles.chatBar} />
         </View>
-        <View style={{flexDirection: 'row'}}>
-          <View style={{width: '90%'}}>
-            <CustomInput
-              onFocus={onInputFocus}
-              onBlur={onInputFocusOut}
-              value={inputText}
-              onChangeText={setInputText}
-            />
+        {!isFinished && (
+          <View style={{flexDirection: 'row'}}>
+            <View style={{width: '85%'}}>
+              <CustomInput
+                onFocus={onInputFocus}
+                onBlur={onInputFocusOut}
+                value={inputText}
+                onChangeText={setInputText}
+              />
+            </View>
+            <TouchableOpacity style={styles.BtnBox} onPress={handleAnswer}>
+              <Text style={styles.submitBtn}>전송</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.BtnBox} onPress={handleAnswer}>
-            <Text style={styles.submitBtn}>전송</Text>
-          </TouchableOpacity>
-        </View>
+        )}
       </View>
     </View>
   )
