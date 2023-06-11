@@ -19,7 +19,15 @@ const Home = ({navigation}) => {
       setNickname(nickname ?? 'user')
     })
   }, [])
-  
+
+  useEffect(() => {
+    ;(async () => {
+      const response = await fetch('https://mocum-project-gmck.vercel.app/api/dev/recipeData')
+      const json = await response.json()
+      console.log(json)
+    })()
+  }, [])
+
   return (
     <ScrollView style={[styles.container, commonStyles.container]}>
       <Image source={require('../../assets/img/main_welcome.png')} style={styles.mainImg} />
